@@ -6,9 +6,11 @@ import java.net.URISyntaxException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
+@RequestMapping("/oauth")
 public class SignInController {
 
 	@GetMapping("/sign-in")
@@ -20,7 +22,7 @@ public class SignInController {
 		return "sign-in";
 	}
 	
-	@GetMapping("/sign-in/redirect")
+	@GetMapping("/redirect")
 	public String redirectSignIn(Model model,
 			@RequestParam(value="username") String username, 
 			@RequestParam(value="password") String password, 
