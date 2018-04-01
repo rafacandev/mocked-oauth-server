@@ -1,53 +1,77 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<style type="text/css">
-		form {
+		.centered {
 			text-align:center;
-			padding: 2em 0em 0em 0em;
 		}
 		form div {
-			padding: 0.3em 0em 0em 0.3em;
+			padding: 1em 1em 1em 1em;
 		}
 	</style>
+	<script type="text/javascript">
+		var lastKeyPress = new Date().getTime();
+		function autoUsername(username) {
+			var u = username.toLowerCase().trim();
+			if ((new Date().getTime() - lastKeyPress) > 300 && u.length == 1) {
+				if (u.startsWith('a')) {
+					u = 'alice';
+				}
+				if (u.startsWith('b')) {
+					u = 'bob';
+				}
+				if (u.startsWith('c')) {
+					u = 'carol';
+				}
+				if (u.startsWith('d')) {
+					u = 'dylan';
+				}
+				if (u.startsWith('e')) {
+					u = 'elton';
+				}
+				document.getElementById('username').value = u;
+			}
+			lastKeyPress = new Date().getTime();
+		}
+	</script>
 
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../bulma.css">
 	<title>Sign-in</title>
 </head>
 <body>
 
 <form action="/oauth/redirect">
-	<div>
+	<div class="centered">
 		<label>username:</label>
-		<input id="username" name="username" type="text" autofocus value="alice">
+		<input class="input is-medium" id="username" name="username" type="text" value="alice" onkeyup="autoUsername(this.value)">
 	</div>
-	<div>
+	<div class="centered">
 		<label>password:</label>
-		<input id="password" name="password" type="password">
+		<input class="input is-medium" id="password" name="password" type="password">
+	</div>
+	<div class="centered">
+		<button class="button is-medium" type="submit">Sign-in</button>
+	</div>
+	
+	<div style="padding-top:0.5em">
+		Valid <i>usernames</i> (password is irrelevant):
+		alice<br>
+		bob<br>
+		carol<br>
+		dylan<br>
+		elton<br>
+	</div>
+	
+	<div>
+		<b>redirect_uri:</b> <span th:text="${redirect_uri}"></span>
 	</div>
 	<div>
-		<button type="submit">Sign-in</button>
-	</div>
-	<div style="padding:2em 0em 0em 0em">
-		<label>redirect_uri:</label>
-		<input name="redirect_uri" th:value="${redirect_uri}">
-	</div>
-	<div>
-		<label>state:</label>
-		<input name="state" th:value="${state}">
+		<b>state:</b> <span th:text="${state}"></span>
 	</div>
 </form>
 
-<div>
-<p>List of valid <i>usernames</i> (password is irrelevant):</p>
-	<ul>
-		<li>alice</li>
-		<li>bob</li>
-		<li>carol</li>
-		<li>dylan</li>
-		<li>elton</li>
-	</ul>
-</div>
 
 </body>
 </html>
