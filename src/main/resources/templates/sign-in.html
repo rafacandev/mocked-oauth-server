@@ -66,9 +66,11 @@
 	
 	<div>
 		<b>redirect_uri:</b> <span th:text="${redirect_uri}"></span>
+		<input name="redirect_uri" type="hidden" th:value="${redirect_uri}">
 	</div>
 	<div>
 		<b>state:</b> <span th:text="${state}"></span>
+		<input name="state" type="hidden" th:value="${state}">
 	</div>
 </form>
 
