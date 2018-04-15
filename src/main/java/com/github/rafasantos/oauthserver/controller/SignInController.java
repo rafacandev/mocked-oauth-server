@@ -10,19 +10,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("/oauth")
+@RequestMapping("/")
 public class SignInController {
 
-	@GetMapping("/sign-in")
+	@GetMapping("sign-in")
 	public String signInPage(Model model,
 			@RequestParam(value="state") String state,
 			@RequestParam(value="redirect_uri") String redirectUri) {
+		System.out.println("Sign-in request with state: " + state + "; redirect_uri: " + redirectUri);
 		model.addAttribute("state", state);
 		model.addAttribute("redirect_uri", redirectUri);
 		return "sign-in";
 	}
 	
-	@GetMapping("/redirect")
+	@GetMapping("redirect")
 	public String redirectSignIn(Model model,
 			@RequestParam(value="username") String username, 
 			@RequestParam(value="password") String password, 
@@ -34,6 +35,7 @@ public class SignInController {
 			username.startsWith("dylan") ||
 			username.startsWith("elton")) {
 			URI uri = new URI(redirectUri + "?state=" + state + "&code=" + username);
+			System.out.println("Redirect request with username: " + username + "; password: " + password + "; redirect_uri: " + redirectUri + "; state: " + state);
 			return "redirect:" + uri;			
 		} else {
 			model.addAttribute("errorMessage", "Username [" + username + "] is not registered.");
