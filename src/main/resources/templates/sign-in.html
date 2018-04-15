@@ -5,39 +5,18 @@
 		.centered {
 			text-align:center;
 		}
+		body, input {
+			font-size: large;
+		}
 		form div {
 			padding: 1em 1em 1em 1em;
 		}
-	</style>
-	<script type="text/javascript">
-		var lastKeyPress = new Date().getTime();
-		function autoUsername(username) {
-			var u = username.toLowerCase().trim();
-			if ((new Date().getTime() - lastKeyPress) > 300 && u.length == 1) {
-				if (u.startsWith('a')) {
-					u = 'alice';
-				}
-				if (u.startsWith('b')) {
-					u = 'bob';
-				}
-				if (u.startsWith('c')) {
-					u = 'carol';
-				}
-				if (u.startsWith('d')) {
-					u = 'dylan';
-				}
-				if (u.startsWith('e')) {
-					u = 'elton';
-				}
-				document.getElementById('username').value = u;
-			}
-			lastKeyPress = new Date().getTime();
+		label {
+			display: block;
 		}
-	</script>
-
+	</style>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="bulma.css">
 	<title>Sign-in</title>
 </head>
 <body>
@@ -45,7 +24,7 @@
 <form action="/oauth/redirect">
 	<div class="centered">
 		<label>username:</label>
-		<input class="input is-medium" id="username" name="username" type="text" value="alice" onkeyup="autoUsername(this.value)">
+		<input class="input is-medium" id="username" name="username" type="text" value="alice">
 	</div>
 	<div class="centered">
 		<label>password:</label>
@@ -73,7 +52,6 @@
 		<input name="state" type="hidden" th:value="${state}">
 	</div>
 </form>
-
 
 </body>
 </html>

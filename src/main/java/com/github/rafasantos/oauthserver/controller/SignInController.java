@@ -29,11 +29,24 @@ public class SignInController {
 			@RequestParam(value="password") String password, 
 			@RequestParam(value="redirect_uri") String redirectUri,
 			@RequestParam(value="state") String state) throws URISyntaxException {
-		if (username.startsWith("alice") ||
-			username.startsWith("bob")   ||
-			username.startsWith("carol") ||
-			username.startsWith("dylan") ||
-			username.startsWith("elton")) {
+		String parsedUsername = username.toLowerCase();
+		if (parsedUsername.startsWith("a")) {
+			parsedUsername = "alice";
+		} else if (parsedUsername.startsWith("b")) {
+			parsedUsername = "bob";
+		} else if (parsedUsername.startsWith("c")) {
+			parsedUsername = "carol";
+		} else if (parsedUsername.startsWith("d")) {
+			parsedUsername = "dylan";
+		} else if (parsedUsername.startsWith("e")) {
+			parsedUsername = "elton";
+		}
+		
+		if (parsedUsername.startsWith("alice") ||
+			parsedUsername.startsWith("bob")   ||
+			parsedUsername.startsWith("carol") ||
+			parsedUsername.startsWith("dylan") ||
+			parsedUsername.startsWith("elton")) {
 			URI uri = new URI(redirectUri + "?state=" + state + "&code=" + username);
 			System.out.println("Redirect request with username: " + username + "; password: " + password + "; redirect_uri: " + redirectUri + "; state: " + state);
 			return "redirect:" + uri;			
