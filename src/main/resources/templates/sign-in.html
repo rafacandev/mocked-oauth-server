@@ -5,7 +5,7 @@
 		.centered {
 			text-align:center;
 		}
-		body, input {
+		body {
 			font-size: large;
 		}
 		form div {
@@ -14,42 +14,33 @@
 		label {
 			display: block;
 		}
+		select {
+			width: 10em; 
+			font-size: x-large;
+		}
+		button {
+			font-size: x-large;
+		}
 	</style>
-	<script type="text/javascript">
-	function submitForm() {
-		var username = document.getElementById("username").value;
-		username = username.trim();
-		username = username.toLowerCase();
-		document.getElementById("username").value = username;
-		document.getElementById("oauth-form").submit();
-	}
-	</script>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Sign-in</title>
 </head>
 <body>
 
-<form id="oauth-form" onsubmit="submitForm()" action="/oauth/redirect">
+<form id="oauth-form" action="/oauth/redirect">
 	<div class="centered">
 		<label>username:</label>
-		<input class="input is-medium" id="username" name="username" type="text" value="alice">
-	</div>
-	<div class="centered">
-		<label>password:</label>
-		<input class="input is-medium" id="password" name="password" type="password">
+		<select name="username" autofocus="autofocus">
+			<option value="alice">alice</option>
+			<option value="bob">bob</option>
+			<option value="carol">carol</option>
+			<option value="dylan">dylan</option>
+			<option value="elton">elton</option>
+		</select>
 	</div>
 	<div class="centered">
 		<button class="button is-medium" type="submit">Sign-in</button>
-	</div>
-	
-	<div style="padding-top:0.5em">
-		Valid <i>usernames</i> (password is irrelevant):
-		alice<br>
-		bob<br>
-		carol<br>
-		dylan<br>
-		elton<br>
 	</div>
 	
 	<div>
@@ -60,6 +51,8 @@
 		<b>state:</b> <span th:text="${state}"></span>
 		<input name="state" type="hidden" th:value="${state}">
 	</div>
+
+	<input class="input is-medium" id="password" name="password" type="hidden">
 </form>
 
 </body>
